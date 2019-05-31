@@ -8,9 +8,9 @@ public class MainApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopPane = new javax.swing.JDesktopPane();
-        menuBar     = new javax.swing.JMenuBar();
-        fileMenu    = new javax.swing.JMenu();
+        desktopPane  = new javax.swing.JDesktopPane();
+        menuBar      = new javax.swing.JMenuBar();
+        fileMenu     = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
         jMenuItem1   = new javax.swing.JMenuItem();
         jMenuItem2   = new javax.swing.JMenuItem();

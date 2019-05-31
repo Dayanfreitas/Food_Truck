@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.catolicasc.foodtruck.models.User;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
@@ -26,6 +29,8 @@ public class Principal extends JFrame {
 				try {
 					Principal frame = new Principal();
 					frame.setVisible(true);
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -38,9 +43,12 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
-		desktopPane = new JDesktopPane();
-		
+		desktopPane = new JDesktopPane();;
 		desktopPane.setBounds(0, 0, 684, 640);
+		
+		JUserList listUsers= new JUserList();
+		desktopPane.add(listUsers);
+		listUsers.setVisible(true);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(20, 20, 700, 700);
@@ -56,9 +64,14 @@ public class Principal extends JFrame {
 		
 		opUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JUser user = new JUser();
-				desktopPane.add(user);
-				user.setVisible(true);
+
+				JUserList listUsers= new JUserList();
+				desktopPane.add(listUsers);
+				listUsers.setVisible(true);
+
+//				JUser user = new JUser();
+//				desktopPane.add(user);
+//				user.setVisible(true);
 			}
 			
 		});
@@ -70,5 +83,4 @@ public class Principal extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(desktopPane);
 	}
-
 }

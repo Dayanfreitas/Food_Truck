@@ -12,7 +12,7 @@ public class UserBO {
 	}
 	
 	public Boolean verificarEmailExiste(User user){
-		if (user.getEmail().isEmpty()){
+		if (user.getEmail().isEmpty() || user.getName().trim().equals("")){
 			return false;
 		}
 		return true;

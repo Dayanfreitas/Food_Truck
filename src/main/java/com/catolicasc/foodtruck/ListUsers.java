@@ -45,11 +45,11 @@ public class ListUsers extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtUsers = new javax.swing.JTable();
-        jbAdd = new javax.swing.JButton();
-        jbUpdate = new javax.swing.JButton();
-        jbDelete = new javax.swing.JButton();
-        jbAdd1 = new javax.swing.JButton();
+        jtUsers 	 = new javax.swing.JTable();
+        jbAdd 		 = new javax.swing.JButton();
+        jbUpdate     = new javax.swing.JButton();
+        jbDelete     = new javax.swing.JButton();
+        jbAdd1       = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -73,13 +73,8 @@ public class ListUsers extends javax.swing.JInternalFrame {
         });
 
         jtUsers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Nome", "email"
-            }
-        ) {
+            new Object [][] {},
+            new String [] {"Código", "Nome", "email"}) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };

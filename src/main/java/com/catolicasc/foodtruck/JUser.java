@@ -11,7 +11,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.print.attribute.standard.RequestingUserName;
 import javax.swing.JButton;
 
 public class JUser extends JInternalFrame {
