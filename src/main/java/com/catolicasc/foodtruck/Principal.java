@@ -1,8 +1,6 @@
 package com.catolicasc.foodtruck;
-
-import java.awt.BorderLayout;
+/*https://www.devmedia.com.br/forum/jframe-abrir-jinternalframe/568591*/
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,10 +8,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JDesktopPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
+	private JDesktopPane desktopPane;
+	
 
 	/**
 	 * Launch the application.
@@ -31,12 +33,17 @@ public class Principal extends JFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
 	public Principal() {
+		desktopPane = new JDesktopPane();
+		
+		desktopPane.setBounds(0, 0, 684, 640);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(20, 20, 700, 700);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setToolTipText("");
@@ -45,15 +52,22 @@ public class Principal extends JFrame {
 		JMenu menuTelas = new JMenu("Telas");
 		menuBar.add(menuTelas);
 		
-		JMenuItem opUser = new JMenuItem("User");
+		JMenuItem opUser = new JMenuItem("Usuários");
+		
+		opUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JUser user = new JUser();
+				desktopPane.add(user);
+				user.setVisible(true);
+			}
+			
+		});
+		
 		menuTelas.add(opUser);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBounds(10, 11, 356, 190);
 		contentPane.add(desktopPane);
 	}
 

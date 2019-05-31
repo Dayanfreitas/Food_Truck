@@ -1,7 +1,5 @@
 package com.catolicasc.foodtruck;
 
-import com.catolicasc.foodtruck.models.User;
-
 public class MainApp extends javax.swing.JFrame {
     public MainApp() {
         initComponents();
@@ -11,12 +9,12 @@ public class MainApp extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
-        menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
+        menuBar     = new javax.swing.JMenuBar();
+        fileMenu    = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem1   = new javax.swing.JMenuItem();
+        jMenuItem2   = new javax.swing.JMenuItem();
+        jMenuItem3   = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -28,6 +26,7 @@ public class MainApp extends javax.swing.JFrame {
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openMenuItemActionPerformed(evt);
+                
             }
         });
         fileMenu.add(openMenuItem);
@@ -36,6 +35,9 @@ public class MainApp extends javax.swing.JFrame {
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
+                AddEditUser user = new AddEditUser();
+                desktopPane.add(user);
+                desktopPane.setVisible(true);
             }
         });
         fileMenu.add(jMenuItem1);
@@ -50,9 +52,7 @@ public class MainApp extends javax.swing.JFrame {
             }
         });
         fileMenu.add(jMenuItem3);
-
         menuBar.add(fileMenu);
-
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -86,11 +86,8 @@ public class MainApp extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
+     
+    	try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());

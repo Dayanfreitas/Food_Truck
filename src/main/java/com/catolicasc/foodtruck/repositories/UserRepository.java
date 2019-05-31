@@ -72,7 +72,7 @@ public class UserRepository {
     
     public User add(User user) {
         try {
-            String sql = "INSERT INTO USERS (NAME, EMAIL) VALUES (?, ?)";
+            String sql = "INSERT INTO users(NOME, EMAIL) VALUES(?, ?)";
             PreparedStatement insertStmt = connection.prepareStatement(sql);
             insertStmt.setString(1, user.getName());
             insertStmt.setString(2, user.getEmail());
