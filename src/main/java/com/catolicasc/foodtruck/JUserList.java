@@ -7,6 +7,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JUserList extends JInternalFrame {
 	private JTable table;
@@ -40,13 +42,17 @@ public class JUserList extends JInternalFrame {
 		getContentPane().add(scrollPane);
 		
 		String [] colunas = {"ID","Nome","Email"};
-		Object [][] dado = {{"1","Dayan","dayan@gmail"}};
+		Object [][] dado = {{}};
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(dado,colunas));
 		scrollPane.setViewportView(table);	
 		
 		JButton btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnAdicionar.setBounds(210, 11, 164, 46);
 		getContentPane().add(btnAdicionar);
 		

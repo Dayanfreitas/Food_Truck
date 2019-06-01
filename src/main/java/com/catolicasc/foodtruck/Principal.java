@@ -30,8 +30,7 @@ public class Principal extends JFrame {
 					Principal frame = new Principal();
 					frame.setTitle("Food Truck");
 					frame.setVisible(true);
-					
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,9 +46,9 @@ public class Principal extends JFrame {
 		desktopPane = new JDesktopPane();;
 		desktopPane.setBounds(0, 0, 684, 640);
 		
-		JUserList listUsers= new JUserList();
-		desktopPane.add(listUsers);
-		listUsers.setVisible(true);
+		//JUserList listUsers= new JUserList();
+		//desktopPane.add(listUsers);
+		//listUsers.setVisible(true);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(20, 20, 700, 700);
@@ -66,13 +65,13 @@ public class Principal extends JFrame {
 		opUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				JUserList listUsers = new JUserList();
-				desktopPane.add(listUsers);
-				listUsers.setVisible(true);
+				//JUserList listUsers = new JUserList();
+				//desktopPane.add(listUsers);
+				//listUsers.setVisible(true);
 
-//				JUser user = new JUser();
-//				desktopPane.add(user);
-//				user.setVisible(true);
+				JUser user = new JUser();
+				desktopPane.add(user);
+				user.setVisible(true);
 			}
 			
 		});

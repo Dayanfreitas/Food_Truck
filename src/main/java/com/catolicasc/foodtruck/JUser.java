@@ -52,8 +52,8 @@ public class JUser extends JInternalFrame {
 		lblID.setBounds(10, 11, 46, 14);
 		getContentPane().add(lblID);
 		
-		JLabel lblName = new JLabel("Nome:");
-		lblName.setBounds(10, 47, 46, 14);
+		JLabel lblName = new JLabel("Nome*:");
+		lblName.setBounds(10, 47, 50, 14);
 		getContentPane().add(lblName);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -83,23 +83,26 @@ public class JUser extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
 				String name  = textFieldName.getText();
 				String email = textFieldEmail.getText();
 				String msg   = "";
 				
-				user = new User();
-				user.setName(name);
-				user.setEmail(email);
-
-				if (userBO.verificarNomeExiste(user)) {
-					msg = "Nome existe!";
-					user = userRepository.add(user);
-					msg  = String.format("Usuário %s cadastrado com, sucesso!",user.getId());
-				}else {
-					msg = "Nome é obrigatório!";
+				try {
+					user = new User();
+					user.setName(name);
+					user.setEmail(email);
+					
+					if (userBO.verificarNomeExiste(user)) {
+						msg = "Nome existe!";
+						user = userRepository.add(user);
+						msg  = String.format("Usuário %s cadastrado com, sucesso!",user.getId());
+					}else {
+						msg = "Nome é obrigatório!";
+					}
+				}catch (Exception ex) {
+					msg = "Erro ao salvar usuário!";
 				}
-				
+
 				JOptionPane.showMessageDialog(null, msg);
 //				lbDebug.setText(msg);
 			}
