@@ -22,6 +22,12 @@ public class JUser extends JInternalFrame {
 	private JTextField textFieldName;
 	private JTextField textFieldEmail;
 	private JLabel lbDebug;
+	
+	public void updateScreen(User user) {
+		textFieldID.setText(user.getId().toString());
+		textFieldName.setText(user.getName());
+		textFieldEmail.setText(user.getEmail());
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -83,19 +89,22 @@ public class JUser extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String name  = textFieldName.getText();
-				String email = textFieldEmail.getText();
 				String msg   = "";
 				
 				try {
+					String name  = textFieldName.getText();
+					String email = textFieldEmail.getText();
+	
 					user = new User();
 					user.setName(name);
 					user.setEmail(email);
 					
 					if (userBO.verificarNomeExiste(user)) {
-						msg = "Nome existe!";
-						user = userRepository.add(user);
-						msg  = String.format("Usuário %s cadastrado com, sucesso!",user.getId());
+						msg  = "Nome existe!";
+						userRepository.add(user);
+						updateScreen(user);
+						
+						//msg  = String.format("Usuário %s cadastrado com, sucesso!",user.getId());
 					}else {
 						msg = "Nome é obrigatório!";
 					}

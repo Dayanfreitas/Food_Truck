@@ -20,7 +20,7 @@ public class UserRepository {
         try {
             ArrayList<User>  users = new ArrayList<>();
             
-            String sql = "SELECT id, name, email FROM users";
+            String sql = "SELECT ID, NAME,EMAIL FROM USERS";
             Statement selectStmt = connection.createStatement();
             ResultSet resultSet = selectStmt.executeQuery(sql);
             
@@ -72,7 +72,7 @@ public class UserRepository {
     
     public User add(User user) {
         try {
-            String sql = "INSERT INTO USERS(NAM, EMAIL) VALUES(?, ?)";
+            String sql = "INSERT INTO USERS(NAME, EMAIL) VALUES(?, ?)";
             PreparedStatement insertStmt = connection.prepareStatement(sql);
             insertStmt.setString(1, user.getName());
             insertStmt.setString(2, user.getEmail());
