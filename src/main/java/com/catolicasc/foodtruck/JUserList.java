@@ -5,11 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import java.awt.List;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import java.awt.Label;
 
 public class JUserList extends JInternalFrame {
 	private JTable table;
@@ -34,6 +31,7 @@ public class JUserList extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public JUserList() {
+		setClosable(true);
 		setBounds(20, 20, 400, 355);
 		getContentPane().setLayout(null);
 		
@@ -42,7 +40,7 @@ public class JUserList extends JInternalFrame {
 		getContentPane().add(scrollPane);
 		
 		String [] colunas = {"ID","Nome","Email"};
-		Object [][] dado = {{"1","00 0000 0000","dayan@gmail"}};
+		Object [][] dado = {{"1","Dayan","dayan@gmail"}};
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(dado,colunas));

@@ -13,16 +13,23 @@ import java.sql.SQLException;
  *
  * @author Dayan Orlando de Freitas
  */
+
 public class ConnectionFactory {
-    public Connection getConnection() {
+
+	/**
+	 * <code> public Connection getConnection()</code>
+	 * @return Retorna a conexão com a base de dados; 
+	 */
+	public Connection getConnection() {
         try {
-            String host = "jdbc:mysql://localhost/food_truck?useTimezone=true&serverTimezone=UTC";
+            String host = "jdbc:mysql://localhost/Food_Truck?useTimezone=true&serverTimezone=UTC";
             String user = "root";
-            String password = "";
+            String password = "root";
             Connection connection = DriverManager.getConnection(host, user, password);
             return connection;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+
     }
 }

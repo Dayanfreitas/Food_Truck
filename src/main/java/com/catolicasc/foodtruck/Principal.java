@@ -1,12 +1,8 @@
 package com.catolicasc.foodtruck;
-/*https://www.devmedia.com.br/forum/jframe-abrir-jinternalframe/568591*/
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import com.catolicasc.foodtruck.models.User;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
@@ -14,6 +10,10 @@ import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+*
+* @author Dayan
+*/
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
@@ -28,6 +28,7 @@ public class Principal extends JFrame {
 			public void run() {
 				try {
 					Principal frame = new Principal();
+					frame.setTitle("Food Truck");
 					frame.setVisible(true);
 					
 					
@@ -65,7 +66,7 @@ public class Principal extends JFrame {
 		opUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				JUserList listUsers= new JUserList();
+				JUserList listUsers = new JUserList();
 				desktopPane.add(listUsers);
 				listUsers.setVisible(true);
 
