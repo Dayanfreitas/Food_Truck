@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 public class ListUsers extends javax.swing.JInternalFrame {
     
     private UserRepository userRepository = new UserRepository();
-
+    
     /**
      * Creates new form ListUsers
      */
@@ -73,11 +73,12 @@ public class ListUsers extends javax.swing.JInternalFrame {
         });
 
         jtUsers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {},
-            new String [] {"Código", "Nome", "email"}) {
-            Class[] types = new Class [] {
+        		new Object [][] {},new String [] {"Código", "Nome", "email"}){
+            
+        	Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
+        	
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
@@ -89,7 +90,9 @@ public class ListUsers extends javax.swing.JInternalFrame {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
+            
         });
+
         jScrollPane1.setViewportView(jtUsers);
 
         jbAdd.setLabel("Adicionar");
