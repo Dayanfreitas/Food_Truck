@@ -3,6 +3,7 @@ package com.catolicasc.foodtruck;
 import com.catolicasc.foodtruck.BO.UserBO;
 import com.catolicasc.foodtruck.models.User;
 import com.catolicasc.foodtruck.repositories.UserRepository;
+import com.google.protobuf.Descriptors.Descriptor;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -12,38 +13,39 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+/**
+ * <code>public class JUser</code><br>
+ * JInternalFrame de usuário, cadastrado e edição
+ * @author dayanfreitas
+ */
 public class JUser extends JInternalFrame {
 	private UserRepository userRepository = new UserRepository();
 	private UserBO userBO = new UserBO();
-	private User user;
+	private User user=null;
 	
 	private JTextField textFieldID;
 	private JTextField textFieldName;
 	private JTextField textFieldEmail;
 	private JLabel lbDebug;
+	
 	/**
-	 * Launch the application.
+	 * Criação da tela
+	 * @author dayanfreitas
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JUser frame = new JUser();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+	public JUser() {
+
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameOpened(InternalFrameEvent e) {
+				if (user != null){
+					updateScreen(user);
 				}
 			}
 		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public JUser() {
+	
 		lbDebug = new JLabel("-");
-		setMaximizable(true);
 		setClosable(true);
 		setBounds(20, 20, 400, 400);
 		getContentPane().setLayout(null);
@@ -82,41 +84,73 @@ public class JUser extends JInternalFrame {
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String name  = textFieldName.getText();
-				String email = textFieldEmail.getText();
 				String msg   = "";
-				
 				try {
-					user = new User();
-					user.setName(name);
-					user.setEmail(email);
+					String name  = textFieldName.getText();
+					String email = textFieldEmail.getText();
+					//Verificar se usuario existe
+					//Se user não exitir criar 
 					
-					if (userBO.verificarNomeExiste(user)) {
-						msg = "Nome existe!";
-						user = userRepository.add(user);
-						msg  = String.format("Usuário %s cadastrado com, sucesso!",user.getId());
+					if (userBO.verificarUsuarioExite(user) == false) {
+						user = new User();
+						user.setName(name);
+						user.setEmail(email);
+						
+						if (userBO.verificarNomeExiste(user)) {
+							userRepository.add(user);
+							//updateScreen(user);
+							msg  = "Usuário cadastrado com sucesso!";
+							JUser.this.dispose();
+						}else {
+							msg = "Nome é obrigatório!";
+						}
 					}else {
-						msg = "Nome é obrigatório!";
+						user.setName(name);
+						user.setEmail(email);
+						userRepository.edit(user);
+						msg = "Atualizado com sucesso!";
+						JUser.this.dispose();
 					}
+					
 				}catch (Exception ex) {
 					msg = "Erro ao salvar usuário!";
 				}
-
 				JOptionPane.showMessageDialog(null, msg);
-//				lbDebug.setText(msg);
 			}
 		});
 		getContentPane().add(btnSave);
 		
-		
 		JButton btnCancel = new JButton("Cancelar");
-		btnCancel.setBounds(66, 119, 89, 23);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cleanField();
+			}
+		});
+		btnCancel.setBounds(66, 119, 99, 23);
 		getContentPane().add(btnCancel);
-		
 		
 		lbDebug.setBounds(66, 265, 46, 14);
 		getContentPane().add(lbDebug);
-
+	}
+	
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public void updateScreen(User user) {
+		textFieldID.setText(user.getId().toString());
+		textFieldName.setText(user.getName());
+		textFieldEmail.setText(user.getEmail());
+	}
+	
+	/**
+	 * Limpar os campos
+	 * @author dayanfreitas
+	 */
+	public void cleanField() {
+		textFieldID.setText("-");
+		textFieldName.setText("");
+		textFieldEmail.setText("");
 	}
 }

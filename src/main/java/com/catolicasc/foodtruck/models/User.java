@@ -1,7 +1,14 @@
 package com.catolicasc.foodtruck.models;
 
+
+
+/**
+ * <code>public class User</code><br>
+ * classe modelo para usuários do meu banco
+ * @author dayanfreitas
+ */
 public class User {
-    
+
     private Integer id;
     private String name;
     private String email;

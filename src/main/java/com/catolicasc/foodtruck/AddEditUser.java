@@ -38,6 +38,7 @@ public class AddEditUser extends javax.swing.JInternalFrame {
         tfEmail  = new javax.swing.JTextField();
         btSave   = new javax.swing.JButton();
         btCancel = new javax.swing.JButton();
+        
 
         setClosable(true);
         setMaximizable(true);

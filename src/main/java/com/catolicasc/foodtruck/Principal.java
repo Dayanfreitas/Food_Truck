@@ -3,6 +3,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.catolicasc.foodtruck.models.User;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
@@ -44,7 +47,7 @@ public class Principal extends JFrame {
 	 */
 	public Principal() {
 		desktopPane = new JDesktopPane();;
-		desktopPane.setBounds(0, 0, 684, 640);
+		desktopPane.setBounds(0, 0, 700, 700);
 		
 		//JUserList listUsers= new JUserList();
 		//desktopPane.add(listUsers);
@@ -65,13 +68,10 @@ public class Principal extends JFrame {
 		opUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				//JUserList listUsers = new JUserList();
-				//desktopPane.add(listUsers);
-				//listUsers.setVisible(true);
+				JUserList listUsers = new JUserList();
+				desktopPane.add(listUsers);
+				listUsers.setVisible(true);
 
-				JUser user = new JUser();
-				desktopPane.add(user);
-				user.setVisible(true);
 			}
 			
 		});
