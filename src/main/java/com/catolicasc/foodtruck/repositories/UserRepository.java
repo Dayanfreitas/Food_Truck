@@ -14,7 +14,7 @@ public class UserRepository {
     private static final String TABLE  = "USERS";
     private static final String CREATE = "INSERT INTO "+TABLE+"(NAME, EMAIL) VALUES(?, ?)";
     private static final String READ   = "SELECT ID,NAME,EMAIL FROM "+TABLE;
-    private static final String UPDATE =  TABLE+" SET NAME=?, EMAIL=? WHERE ID=?";
+    private static final String UPDATE = "UPDATE "+TABLE+" SET NAME=?, EMAIL=? WHERE ID=?";
     private static final String DELETE = "DELETE FROM "+TABLE+" WHERE ID=?";
     private static final String GET_ID = "SELECT ID,NAME,EMAIL FROM "+TABLE+" WHERE id = ?";
     public UserRepository() {
