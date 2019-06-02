@@ -119,7 +119,7 @@ public class JUser extends JInternalFrame {
 		JButton btnCancel = new JButton("Cancelar");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JUser.this.dispose();
+				btCancelActionPerformed(e);
 			}
 		});
 		btnCancel.setBounds(66, 119, 99, 23);
@@ -148,5 +148,15 @@ public class JUser extends JInternalFrame {
 		textFieldID.setText("-");
 		textFieldName.setText("");
 		textFieldEmail.setText("");
+	}
+	/**
+	 * 
+	 * @author dayanfreitas
+	 * @param e evento
+	 */
+	private void btCancelActionPerformed(ActionEvent e) {
+		System.out.print(e);
+		if(new Help().confirmCancel(e))
+			this.dispose();
 	}
 }

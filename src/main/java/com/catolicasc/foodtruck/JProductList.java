@@ -76,7 +76,7 @@ public class JProductList extends JInternalFrame {
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+			
 				AddEditProduct addEditProduct = new AddEditProduct();
 				getParent().add(addEditProduct);
 				addEditProduct.setVisible(true);

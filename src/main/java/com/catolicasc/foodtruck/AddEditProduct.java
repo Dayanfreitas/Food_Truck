@@ -10,7 +10,7 @@ import javax.swing.GroupLayout;
 public class AddEditProduct extends javax.swing.JInternalFrame {
     private ProductRepository productRepository = new ProductRepository();
     private Product product;
-    
+   
     public void setUser(Product product){
         this.product = product;
     }
@@ -21,35 +21,31 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
         tfPreco.setText(Double.toString(product.getPrice()));
     }
 
-
     public AddEditProduct() {
     	setClosable(true);
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        btCancel = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        tfID = new javax.swing.JTextField();
-        tfDescricao = new javax.swing.JTextField();
-        tfPreco = new javax.swing.JTextField();
-        btSave = new javax.swing.JButton();
+        btCancel     = new javax.swing.JButton();
+        jlDescricao  = new javax.swing.JLabel();
+        jlPreco      = new javax.swing.JLabel();
+        jlCodigo     = new javax.swing.JLabel();
+        tfID         = new javax.swing.JTextField();
+        tfDescricao  = new javax.swing.JTextField();
+        tfPreco      = new javax.swing.JTextField();
+        btSave       = new javax.swing.JButton();
 
         btCancel.setText("Cancelar");
         btCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelActionPerformed(evt);
+            	btCancelActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Descrição:");
-        jLabel2.setText("Preço:");
-        jLabel3.setText("Código:");
+        jlDescricao.setText("Descrição:");
+        jlPreco.setText("Preço:");
+        jlCodigo.setText("Código:");
 
         tfID.setEditable(false);
         tfID.setEnabled(false);
@@ -73,13 +69,13 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
         					.addComponent(btSave))
         				.addGroup(layout.createSequentialGroup()
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(jLabel1)
+        						.addComponent(jlDescricao)
         						.addGroup(layout.createSequentialGroup()
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jLabel3))
+        							.addComponent(jlCodigo))
         						.addGroup(layout.createSequentialGroup()
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jLabel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(jlPreco, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         							.addGap(27)))
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
@@ -94,15 +90,15 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
         			.addGap(8)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(tfID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(jLabel3))
+        				.addComponent(jlCodigo))
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel1)
+        				.addComponent(jlDescricao)
         				.addComponent(tfDescricao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(tfPreco)
-        				.addComponent(jLabel2))
+        				.addComponent(jlPreco))
         			.addGap(50)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(btSave)
@@ -113,11 +109,15 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btCancelActionPerformed
-
+  
+    /**
+     * @author dayanfreitas
+     * @param evt
+     */
+    private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {
+    	if(new Help().confirmCancel(evt)) 
+    		this.dispose();
+    }
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
     	String msg = "";
         try {
@@ -151,9 +151,9 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancel;
     private javax.swing.JButton btSave;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jlDescricao;
+    private javax.swing.JLabel jlPreco;
+    private javax.swing.JLabel jlCodigo;
     private javax.swing.JTextField tfDescricao;
     private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfPreco;
