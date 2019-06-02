@@ -9,7 +9,6 @@ import javax.swing.JMenu;
 import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 /**
 *
 * @author dayanfreitas
@@ -79,9 +78,9 @@ public class Principal extends JFrame {
 		opProdutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				AddEditProduct addEditProduct = new AddEditProduct();
-				desktopPane.add(addEditProduct);
-				addEditProduct.setVisible(true);
+				 JProductList listProducts = new JProductList();
+				 desktopPane.add(listProducts);
+				 listProducts.setVisible(true);
 				
 			}
 		});

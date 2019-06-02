@@ -10,21 +10,32 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductRepository {
-    
     private Connection connection;
-    
+    private static final String TABLE  = "PRODUCTS";
+    private static final String CREATE = "";
+    private static final String READ   = "SELECT ID, DESCRIPTION, PRICE FROM "+TABLE;
+    private static final String UPDATE = "";
+    private static final String DELETE = "";
+    private static final String GET_ID = "SELECT ID, DESCRIPTION, PRICE FROM "+TABLE+" WHERE ID = ?";
+    public ProductRepository() {
+        connection = new ConnectionFactory().getConnection();
+    }
+    /**
+     * Busca todos o produtos cadastrados 
+     * @return ArrayList<{@link Product}>
+     */
     public ArrayList<Product> getAllProducts(){
         try {
             ArrayList<Product>  products = new ArrayList<>();
             
-            String sql = "SELECT id, description, price FROM products";
+            String sql = READ;
             Statement selectStmt = connection.createStatement();
             ResultSet resultSet = selectStmt.executeQuery(sql);
             
             while(resultSet.next()){
-                int              id = resultSet.getInt("id");
-                String  description = resultSet.getString("description");
-                Double        price = resultSet.getDouble("price");
+                int              id = resultSet.getInt("ID");
+                String  description = resultSet.getString("DESCRIPTION");
+                Double        price = resultSet.getDouble("PRICE");
                 
                 Product product = new Product();
                 product.setId(id);
@@ -34,17 +45,12 @@ public class ProductRepository {
                 products.add(product);
             }
             
-            
-            
             return products;
         }catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-
-        
-        
     }
-    
+
     public Product getProductById(Integer productId){
         try {
             String sql = "SELECT id, description, price FROM products WHERE id = ?";
@@ -74,10 +80,6 @@ public class ProductRepository {
             throw new RuntimeException(ex);
         }
         
-    }
-    
-    public ProductRepository() {
-        connection = new ConnectionFactory().getConnection();
     }
     
     public Product add(Product product) {

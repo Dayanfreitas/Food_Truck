@@ -12,10 +12,10 @@ public class TestaConecao {
 	
 	public static void main(String[] args) throws SQLException{
 		Connection con = new ConnectionFactory().getConnection();
-		String sql = "SELECT id, NAME,email FROM USERS";
+		System.out.println("Conexão aberta!");
+		String sql = "SELECT id, NAME,EMAIL FROM USERS";
 		Statement selectStmt = con.createStatement();
 		ResultSet resultSet = selectStmt.executeQuery(sql);
-		System.out.println("Conexão aberta!");
 		
 		while(resultSet.next()){
 	       int       id = resultSet.getInt("id");
@@ -27,6 +27,21 @@ public class TestaConecao {
 		   System.out.println("Email: "+email);
 		   System.out.println();
 		}
-		con.close();
+		
+		sql = "SELECT ID, DESCRIPTION,PRICE FROM PRODUCTS";
+		resultSet = selectStmt.executeQuery(sql);
+		
+		while(resultSet.next()){
+		       int       id = resultSet.getInt("ID");
+			   String  name = resultSet.getString("DESCRIPTION");
+			   String email = resultSet.getString("PRICE");
+			   
+			   System.out.println("ID          : "+id);
+			   System.out.println("DESCRIPTION : "+name);
+			   System.out.println("PRICE       : "+email);
+			   System.out.println();
+			}
+			
+		con.close();	
 	}
 }

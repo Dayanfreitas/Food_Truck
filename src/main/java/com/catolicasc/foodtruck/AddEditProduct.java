@@ -23,6 +23,7 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
 
 
     public AddEditProduct() {
+    	setClosable(true);
         initComponents();
     }
 
@@ -47,9 +48,7 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setText("Descrição:");
-
         jLabel2.setText("Preço:");
-
         jLabel3.setText("Código:");
 
         tfID.setEditable(false);
@@ -120,28 +119,28 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btCancelActionPerformed
 
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
+    	String msg = "";
         try {
             String description = tfDescricao.getText();
             Double price = Double.parseDouble(tfPreco.getText());
-            String mensagem_usuario = "";
 
-            if(product == null){
-                product = new Product();
+        	if(product == null){
+            	product = new Product();
                 product.setDescription(description);
                 product.setPrice(price);
                 productRepository.add(product);
-                mensagem_usuario = "Produto cadastrado com sucesso";
+                msg = "Produto cadastrado com sucesso";
             }
             else{
                 product.setDescription(description);
                 product.setPrice(price);
                 productRepository.edit(product);
-                mensagem_usuario = "Produto editado com sucesso";
+                msg = "Produto editado com sucesso";
             }
 
             updateScreen(product);
 
-            JOptionPane.showMessageDialog(null, mensagem_usuario);
+            JOptionPane.showMessageDialog(null, msg);
             this.dispose();
         }catch(Exception ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um problema ao salvar");

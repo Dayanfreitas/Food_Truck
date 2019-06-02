@@ -3,28 +3,29 @@ package com.catolicasc.foodtruck;
 import com.catolicasc.foodtruck.models.Product;
 import com.catolicasc.foodtruck.repositories.ProductRepository;
 import javax.swing.JOptionPane;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class ListProducts extends javax.swing.JInternalFrame {
-    
+public class ListProducts extends javax.swing.JInternalFrame {    
     private ProductRepository productRepository = new ProductRepository();
-
 
     public ListProducts() {
         initComponents();
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jbUpdate = new javax.swing.JButton();
-        jbDelete = new javax.swing.JButton();
-        jbAdd1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtProducts = new javax.swing.JTable();
-        jbAdd = new javax.swing.JButton();
+        jbUpdate 		= new javax.swing.JButton();
+        jbDelete 		= new javax.swing.JButton();
+        jbAdd1 			= new javax.swing.JButton();
+        jScrollPane1 	= new javax.swing.JScrollPane();
+        jtProducts 		= new javax.swing.JTable();
+        jbAdd 			= new javax.swing.JButton();
 
         setClosable(true);
+        
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -40,17 +41,18 @@ public class ListProducts extends javax.swing.JInternalFrame {
             }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameOpened(evt);
+                
             }
         });
-
-        jbUpdate.setLabel("Editar");
+        
+        jbUpdate.setText("Editar");
         jbUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbUpdateActionPerformed(evt);
             }
         });
 
-        jbDelete.setLabel("Deletar");
+        jbDelete.setText("Deletar");
         jbDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbDeleteActionPerformed(evt);
@@ -61,17 +63,14 @@ public class ListProducts extends javax.swing.JInternalFrame {
         jbAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAdd1ActionPerformed(evt);
+        
             }
         });
 
         jtProducts.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Descrição", "Preço"
-            }
-        ) {
+            new Object [][] {},
+            new String [] {"Código", "Descrição", "Preço"}) 
+        	{
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
@@ -89,61 +88,63 @@ public class ListProducts extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtProducts);
 
-        jbAdd.setLabel("Adicionar");
+        jbAdd.setText("Adicionar");
         jbAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAddActionPerformed(evt);
+    
             }
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(100, 100, 100)
-                .addComponent(jbUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(147, 147, 147)
-                .addComponent(jbAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(109, 109, 109)
-                .addComponent(jbAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(25)
+        			.addComponent(jbUpdate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jbAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jbDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jbAdd1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        			.addGap(435))
+        		.addGroup(layout.createSequentialGroup()
+        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 568, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jbDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(65, 65, 65))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.CENTER)
+        				.addComponent(jbUpdate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(jbAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(jbAdd1)
+        				.addComponent(jbDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        			.addGap(65))
         );
-
+        getContentPane().setLayout(layout);
         pack();
-    }// </editor-fold>//GEN-END:initComponents
-
+    }
+    
     private void jbUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUpdateActionPerformed
-        if(jtProducts.getSelectedRowCount()==0)
-        {
+        
+    	if(jtProducts.getSelectedRowCount()==0){
             JOptionPane.showMessageDialog(null,"Selecione um usuário");
             return;
         }
 
-        Integer rowIndex = jtProducts.getSelectedRow();
-        Integer productId   = (Integer) jtProducts.getModel().getValueAt(rowIndex,0);
+        Integer rowIndex   = jtProducts.getSelectedRow();
+        Integer productId  = (Integer) jtProducts.getModel().getValueAt(rowIndex,0);
 
-        Product product = ProductRepository.getProductById(productId);
+//        Product product = ProductRepository.getProductById(productId);
 
-        AddEditProduct addEditProduct = new AddEditProduct();
-        addEditProduct.setUser(product);
-        this.getParent().add(addEditProduct);
-        addEditProduct.setVisible(true);
+        //        AddEditProduct addEditProduct = new AddEditProduct();
+        // addEditProduct.setUser(product);
+        //this.getParent().add(addEditProduct);
+        //addEditProduct.setVisible(true);
 
     }//GEN-LAST:event_jbUpdateActionPerformed
 
@@ -166,7 +167,7 @@ public class ListProducts extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbDeleteActionPerformed
 
     private void jbAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdd1ActionPerformed
-        refreshProductList();
+        //refreshProductList();
     }//GEN-LAST:event_jbAdd1ActionPerformed
 
     private void jbAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddActionPerformed
@@ -176,7 +177,7 @@ public class ListProducts extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAddActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        refreshProductList();
+        //refreshProductList();
     }//GEN-LAST:event_formInternalFrameOpened
 
 

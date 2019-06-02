@@ -1,7 +1,7 @@
 package com.catolicasc.foodtruck.models;
 
-public class Product {
-    
+
+public class Product {    
     private Integer id;
     private String description;
     private Double price;
@@ -28,9 +28,5 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public void setId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
