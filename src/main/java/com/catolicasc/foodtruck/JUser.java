@@ -3,9 +3,6 @@ package com.catolicasc.foodtruck;
 import com.catolicasc.foodtruck.BO.UserBO;
 import com.catolicasc.foodtruck.models.User;
 import com.catolicasc.foodtruck.repositories.UserRepository;
-import com.google.protobuf.Descriptors.Descriptor;
-
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JInternalFrame;
@@ -15,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+
 /**
  * <code>public class JUser</code><br>
  * JInternalFrame de usuário, cadastrado e edição
@@ -43,6 +41,7 @@ public class JUser extends JInternalFrame {
 					updateScreen(user);
 				}
 			}
+			
 		});
 	
 		lbDebug = new JLabel("-");
@@ -88,8 +87,6 @@ public class JUser extends JInternalFrame {
 				try {
 					String name  = textFieldName.getText();
 					String email = textFieldEmail.getText();
-					//Verificar se usuario existe
-					//Se user não exitir criar 
 					
 					if (userBO.verificarUsuarioExite(user) == false) {
 						user = new User();
@@ -98,7 +95,6 @@ public class JUser extends JInternalFrame {
 						
 						if (userBO.verificarNomeExiste(user)) {
 							userRepository.add(user);
-							//updateScreen(user);
 							msg  = "Usuário cadastrado com sucesso!";
 							JUser.this.dispose();
 						}else {
@@ -123,7 +119,7 @@ public class JUser extends JInternalFrame {
 		JButton btnCancel = new JButton("Cancelar");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cleanField();
+				JUser.this.dispose();
 			}
 		});
 		btnCancel.setBounds(66, 119, 99, 23);
