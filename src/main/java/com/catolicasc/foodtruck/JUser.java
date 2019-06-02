@@ -23,32 +23,13 @@ import javax.swing.event.InternalFrameEvent;
 public class JUser extends JInternalFrame {
 	private UserRepository userRepository = new UserRepository();
 	private UserBO userBO = new UserBO();
-	private User user;
+	private User user=null;
 	
 	private JTextField textFieldID;
 	private JTextField textFieldName;
 	private JTextField textFieldEmail;
 	private JLabel lbDebug;
-
-	/**
-	 * @author dayanfreitas
-	 * @param user {@link com.catolicasc.foodtruck.models.User}
-	 */
-	public void setUser(User user) {
-		this.user = user;
-	}
 	
-	/**
-	 * Atualiza minha tela caso venha dados de usuário
-	 * @author dayanfreitas
-	 * @param user {@link com.catolicasc.foodtruck.models.User}
-	 */
-	public void updateScreen(User user) {
-		textFieldID.setText(user.getId().toString());
-		textFieldName.setText(user.getName());
-		textFieldEmail.setText(user.getEmail());
-	}
-		
 	/**
 	 * Criação da tela
 	 * @author dayanfreitas
@@ -65,7 +46,6 @@ public class JUser extends JInternalFrame {
 		});
 	
 		lbDebug = new JLabel("-");
-		setMaximizable(true);
 		setClosable(true);
 		setBounds(20, 20, 400, 400);
 		getContentPane().setLayout(null);
@@ -105,53 +85,72 @@ public class JUser extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String msg   = "";
-				
 				try {
 					String name  = textFieldName.getText();
 					String email = textFieldEmail.getText();
-	
-					user = new User();
-					user.setName(name);
-					user.setEmail(email);
+					//Verificar se usuario existe
+					//Se user não exitir criar 
 					
-					if (userBO.verificarNomeExiste(user)) {
-						msg  = "Nome existe!";
-						userRepository.add(user);
-						updateScreen(user);
-						msg  = String.format("Usuário %s cadastrado com, sucesso!",user.getId());
+					if (userBO.verificarUsuarioExite(user) == false) {
+						user = new User();
+						user.setName(name);
+						user.setEmail(email);
+						
+						if (userBO.verificarNomeExiste(user)) {
+							userRepository.add(user);
+							//updateScreen(user);
+							msg  = "Usuário cadastrado com sucesso!";
+							JUser.this.dispose();
+						}else {
+							msg = "Nome é obrigatório!";
+						}
 					}else {
-						msg = "Nome é obrigatório!";
+						user.setName(name);
+						user.setEmail(email);
+						userRepository.edit(user);
+						msg = "Atualizado com sucesso!";
+						JUser.this.dispose();
 					}
+					
 				}catch (Exception ex) {
 					msg = "Erro ao salvar usuário!";
 				}
-
 				JOptionPane.showMessageDialog(null, msg);
-//				lbDebug.setText(msg);
 			}
 		});
 		getContentPane().add(btnSave);
 		
-		
 		JButton btnCancel = new JButton("Cancelar");
-		btnCancel.setBounds(66, 119, 89, 23);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cleanField();
+			}
+		});
+		btnCancel.setBounds(66, 119, 99, 23);
 		getContentPane().add(btnCancel);
-		
 		
 		lbDebug.setBounds(66, 265, 46, 14);
 		getContentPane().add(lbDebug);
 	}
-//	public static void main(String[] args) {
-//	EventQueue.invokeLater(new Runnable() {
-//		public void run() {
-//			try {
-//				JUser frame = new JUser();
-//				frame.setVisible(true);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	});
-//}	
-
+	
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public void updateScreen(User user) {
+		textFieldID.setText(user.getId().toString());
+		textFieldName.setText(user.getName());
+		textFieldEmail.setText(user.getEmail());
+	}
+	
+	/**
+	 * Limpar os campos
+	 * @author dayanfreitas
+	 */
+	public void cleanField() {
+		textFieldID.setText("-");
+		textFieldName.setText("");
+		textFieldEmail.setText("");
+	}
 }

@@ -47,7 +47,7 @@ public class Principal extends JFrame {
 	 */
 	public Principal() {
 		desktopPane = new JDesktopPane();;
-		desktopPane.setBounds(0, 0, 684, 640);
+		desktopPane.setBounds(0, 0, 700, 700);
 		
 		//JUserList listUsers= new JUserList();
 		//desktopPane.add(listUsers);
@@ -72,14 +72,6 @@ public class Principal extends JFrame {
 				desktopPane.add(listUsers);
 				listUsers.setVisible(true);
 
-				//JUser juser = new JUser();
-				//desktopPane.add(juser);
-				//User user = new User();
-				//user.setId(1);
-				//user.setName("dayanTest");
-				//user.setEmail("dayan@gmail.com");
-				//juser.setUser(user);	
-				//juser.setVisible(true);
 			}
 			
 		});
