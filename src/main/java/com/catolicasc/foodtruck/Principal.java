@@ -74,6 +74,18 @@ public class Principal extends JFrame {
 		});
 		
 		menuTelas.add(opUser);
+		
+		JMenuItem opProdutos = new JMenuItem("Produtos");
+		opProdutos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				AddEditProduct addEditProduct = new AddEditProduct();
+				desktopPane.add(addEditProduct);
+				addEditProduct.setVisible(true);
+				
+			}
+		});
+		menuTelas.add(opProdutos);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
