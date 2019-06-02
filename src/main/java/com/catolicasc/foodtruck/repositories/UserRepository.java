@@ -14,7 +14,9 @@ public class UserRepository {
     private static final String TABLE  = "USERS";
     private static final String CREATE = "INSERT INTO "+TABLE+"(NAME, EMAIL) VALUES(?, ?)";
     private static final String READ   = "SELECT ID,NAME,EMAIL FROM "+TABLE;
-    private static final String GET_ID = "SELECT ID, NAME, EMAIL FROM "+TABLE+" WHERE id = ?";
+    private static final String UPDATE =  TABLE+" SET NAME=?, EMAIL=? WHERE ID=?";
+    private static final String DELETE = "DELETE FROM "+TABLE+" WHERE ID=?";
+    private static final String GET_ID = "SELECT ID,NAME,EMAIL FROM "+TABLE+" WHERE id = ?";
     public UserRepository() {
         connection = new ConnectionFactory().getConnection();
     }
@@ -107,14 +109,14 @@ public class UserRepository {
     
     public User edit(User user) {
         try {
-            String sql = "UPDATE USERS SET NAME=?, EMAIL=? WHERE ID=?";
+            String sql = UPDATE;
             PreparedStatement updateStmt = connection.prepareStatement(sql);
             updateStmt.setString(1, user.getName());
             updateStmt.setString(2, user.getEmail());
             updateStmt.setInt(3, user.getId());
             updateStmt.executeUpdate();
             updateStmt.close();
-            
+          
             return user;
         }catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -124,7 +126,7 @@ public class UserRepository {
     public void delete(int userId)
     {
         try {
-            String sql = "DELETE FROM USERS WHERE ID=?";
+            String sql = DELETE;
             PreparedStatement deleteStmt = connection.prepareStatement(sql);
             deleteStmt.setInt(1, userId);
             deleteStmt.executeUpdate();

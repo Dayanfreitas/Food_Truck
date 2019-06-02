@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
@@ -62,12 +61,8 @@ public class JUserList extends JInternalFrame {
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID", "Nome", "Email"
-			}
-		) {
+			new Object[][] {},
+			new String[] {"ID", "Nome", "Email"}){
 			Class[] columnTypes = new Class[] {
 				Integer.class, String.class, String.class
 			};

@@ -3,9 +3,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import com.catolicasc.foodtruck.models.User;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
@@ -15,7 +12,7 @@ import java.awt.event.ActionEvent;
 
 /**
 *
-* @author Dayan
+* @author dayanfreitas
 */
 public class Principal extends JFrame {
 
