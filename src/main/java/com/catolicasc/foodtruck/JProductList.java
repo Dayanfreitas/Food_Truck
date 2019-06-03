@@ -135,7 +135,7 @@ public class JProductList extends JInternalFrame {
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			//	refreshProductList();
+			refreshProductList();
 			}
 		});
 		btnAtualizar.setBounds(476, 265, 164, 46);
