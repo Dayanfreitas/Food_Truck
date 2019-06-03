@@ -15,7 +15,7 @@ public class ProductRepository {
     private static final String CREATE = "INSERT INTO "+TABLE+" (DESCRIPTION, PRICE) VALUES (?, ?)";
     private static final String READ   = "SELECT ID, DESCRIPTION, PRICE FROM "+TABLE;
     private static final String UPDATE = "";
-    private static final String DELETE = "";
+    private static final String DELETE = "DELETE FROM "+TABLE+" WHERE ID=?";
     private static final String GET_ID = "SELECT ID, DESCRIPTION, PRICE FROM "+TABLE+" WHERE ID = ?";
     public ProductRepository() {
         connection = new ConnectionFactory().getConnection();
@@ -125,7 +125,7 @@ public class ProductRepository {
     public void delete(int productId)
     {
         try {
-            String sql = "DELETE FROM PRODUCTS WHERE ID=?";
+            String sql = DELETE;
             PreparedStatement deleteStmt = connection.prepareStatement(sql);
             deleteStmt.setInt(1, productId);
             deleteStmt.executeUpdate();

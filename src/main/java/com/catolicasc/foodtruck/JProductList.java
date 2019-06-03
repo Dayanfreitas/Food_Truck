@@ -117,16 +117,18 @@ public class JProductList extends JInternalFrame {
 		JButton btnDeletar = new JButton("Deletar");
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				if (table.getSelectedRowCount() == 0) {
 					JOptionPane.showMessageDialog(null, "Selecione um usuário");
 					return;
 				}
+
 				int idColumn = 0;
-				Integer rowIndex = table.getSelectedRow();
-				Integer userId   = (Integer)table.getModel().getValueAt(rowIndex, idColumn);
+				Integer rowIndex    = table.getSelectedRow();
+				Integer productId   = (Integer)table.getModel().getValueAt(rowIndex, idColumn);
 				
-				//userRepository.delete(userId);
-				//refreshProductList();
+				productRepository.delete(productId);
+				refreshProductList();
 			}
 		});
 		btnDeletar.setBounds(476, 160, 164, 46);
