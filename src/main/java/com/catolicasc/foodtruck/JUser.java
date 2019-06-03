@@ -150,7 +150,6 @@ public class JUser extends JInternalFrame {
 	
 
 	private void btCancelActionPerformed(ActionEvent e) {
-		System.out.print(e);
 		if(new Help().confirmCancel(e))
 			this.dispose();
 	}
