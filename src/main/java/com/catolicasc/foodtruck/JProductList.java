@@ -1,6 +1,5 @@
 package com.catolicasc.foodtruck;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,9 +12,7 @@ import javax.swing.JTable;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.DefaultTableModel;
-
 import com.catolicasc.foodtruck.models.Product;
-import com.catolicasc.foodtruck.models.User;
 import com.catolicasc.foodtruck.repositories.ProductRepository;
 
 public class JProductList extends JInternalFrame {
@@ -62,10 +59,15 @@ public class JProductList extends JInternalFrame {
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {},
-			new String[] {"ID", "Descrição", "Preço"}){
+			new Object[][] {
+				{null, null, null},
+			},
+			new String[] {
+				"ID", "Descri\u00E7\u00E3o", "Pre\u00E7o"
+			}
+		) {
 			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, String.class
+				Integer.class, String.class, Double.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];

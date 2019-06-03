@@ -16,7 +16,7 @@ public class Product {
 
     public Double getPrice() {
         return price;
-    }
+    }	
 
     public void setId(Integer id) {
         this.id = id;

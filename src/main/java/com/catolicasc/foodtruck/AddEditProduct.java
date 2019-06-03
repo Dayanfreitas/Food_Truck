@@ -1,5 +1,6 @@
 package com.catolicasc.foodtruck;
 
+import com.catolicasc.foodtruck.BO.ProductBO;
 import com.catolicasc.foodtruck.models.Product;
 import com.catolicasc.foodtruck.repositories.ProductRepository;
 import javax.swing.JOptionPane;
@@ -9,6 +10,7 @@ import javax.swing.GroupLayout;
 
 public class AddEditProduct extends javax.swing.JInternalFrame {
     private ProductRepository productRepository = new ProductRepository();
+    private ProductBO productBO = new ProductBO();
     private Product product;
    
     public void setUser(Product product){
@@ -122,13 +124,15 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
     	String msg = "";
         try {
             String description = tfDescricao.getText();
-            Double price = Double.parseDouble(tfPreco.getText());
-
-        	if(product == null){
-            	product = new Product();
-                product.setDescription(description);
+            Double price       = Double.valueOf(tfPreco.getText());
+            
+            System.out.print(price);
+            
+        	if (productBO.verificarProdutoExiste(product) == false){
+        		product = new Product();
+            	product.setDescription(description);
                 product.setPrice(price);
-                productRepository.add(product);
+                productRepository.add(product);        		
                 msg = "Produto cadastrado com sucesso";
             }
             else{
@@ -137,15 +141,13 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
                 productRepository.edit(product);
                 msg = "Produto editado com sucesso";
             }
-
-            updateScreen(product);
-
-            JOptionPane.showMessageDialog(null, msg);
-            this.dispose();
+        	
         }catch(Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um problema ao salvar");
+        	msg = "Ocorreu um problema ao salvar";
+        	product = null;
         }
-    }//GEN-LAST:event_btSaveActionPerformed
+        JOptionPane.showMessageDialog(null, msg);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

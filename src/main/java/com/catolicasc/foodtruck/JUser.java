@@ -84,6 +84,7 @@ public class JUser extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String msg   = "";
+				
 				try {
 					String name  = textFieldName.getText();
 					String email = textFieldEmail.getText();
@@ -93,13 +94,10 @@ public class JUser extends JInternalFrame {
 						user.setName(name);
 						user.setEmail(email);
 						
-						if (userBO.verificarNomeExiste(user)) {
-							userRepository.add(user);
-							msg  = "Usuário cadastrado com sucesso!";
-							JUser.this.dispose();
-						}else {
-							msg = "Nome é obrigatório!";
-						}
+						userRepository.add(user);
+						msg  = "Usuário cadastrado com sucesso!";
+						JUser.this.dispose();
+						
 					}else {
 						user.setName(name);
 						user.setEmail(email);

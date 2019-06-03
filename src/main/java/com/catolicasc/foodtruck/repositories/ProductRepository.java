@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ProductRepository {
     private Connection connection;
     private static final String TABLE  = "PRODUCTS";
-    private static final String CREATE = "";
+    private static final String CREATE = "INSERT INTO "+TABLE+" (DESCRIPTION, PRICE) VALUES (?, ?)";
     private static final String READ   = "SELECT ID, DESCRIPTION, PRICE FROM "+TABLE;
     private static final String UPDATE = "";
     private static final String DELETE = "";
@@ -84,7 +84,7 @@ public class ProductRepository {
     
     public Product add(Product product) {
         try {
-            String sql = "INSERT INTO PRODUCTS (DESCRIPTION, PRICE) VALUES (?, ?)";
+            String sql = CREATE;
             PreparedStatement insertStmt = connection.prepareStatement(sql);
             insertStmt.setString(1, product.getDescription());
             insertStmt.setDouble(2, product.getPrice());
