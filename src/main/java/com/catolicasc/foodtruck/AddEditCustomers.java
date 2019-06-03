@@ -27,10 +27,18 @@ public class AddEditCustomers extends JInternalFrame {
 	private JTextField tFNumero;
 	private JTextField tFBairro;
 
+	public void setCustomer(Customers customers){
+        this.customers = customers;
+    }
+	private void updateScreen(Product product){
+        tfId.setText(customers.getCustomers().getId().toString());
+        tfName.setText(customers.getCustomers().getName());
+        tfEmail.setText(customers.getCustomers().getEmail());
+        
+        String endereco = customers.getAddress();
+        
+    }
 	
-	/**
-	 * Create the frame.
-	 */
 	public AddEditCustomers() {
 		setClosable(true);
 		setBounds(100, 100, 450, 300);
