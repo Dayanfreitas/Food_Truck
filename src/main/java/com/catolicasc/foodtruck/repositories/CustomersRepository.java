@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.print.attribute.standard.RequestingUserName;
+
 public class CustomersRepository {
     private Connection connection;
     
@@ -92,6 +94,52 @@ public class CustomersRepository {
 	            throw new RuntimeException(ex);
 	        }
 	}
-    
+
+	public Customers getUserById(Integer customersId) {
+		try {
+            String sql = GET_ID;
+            PreparedStatement selectStmt = connection.prepareStatement(sql);
+            selectStmt.setInt(1, customersId);
+            ResultSet resultSet = selectStmt.executeQuery();
+            
+        	Customers customers = null;
+            
+            if(resultSet.first()){
+            	customers = new Customers();
+
+	             int id 		= resultSet.getInt("ID");
+	             String name    = resultSet.getString("NAME");
+	             String email   = resultSet.getString("EMAIL");
+	             String address = resultSet.getString("ADDRESS");
+	             customers.getCustomers().setId(id);
+	             customers.getCustomers().setName(name);
+	             customers.getCustomers().setEmail(email);
+	             customers.setAddress(address);
+            }
+            
+            selectStmt.close();
+            return customers;            
+        }catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+	}
+
+	public Customers edit(Customers customers) {
+		try {
+            String sql = UPDATE;
+            PreparedStatement updateStmt = connection.prepareStatement(sql);
+            updateStmt.setString(1, customers.getCustomers().getName());
+            updateStmt.setString(2, customers.getCustomers().getEmail());
+            updateStmt.setString(3, customers.getAddress());
+            updateStmt.setInt(4, customers.getCustomers().getId());
+            updateStmt.executeUpdate();
+            updateStmt.close();
+          
+            return customers;
+        }catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+		
+	}
     
 }

@@ -154,9 +154,10 @@ public class AddEditCustomers extends JInternalFrame {
                 msg = "Cliente cadastrado com sucesso";
             }
             else{
-            /*    product.setDescription(description);
-                product.setPrice(price);
-                productRepository.edit(product);*/
+            	customers.getCustomers().setName(nome);
+            	customers.getCustomers().setEmail(email);
+            	customers.setAddress(rua);
+            	customersRepository.edit(customers);
                 msg = "Cliente editado com sucesso";
             }
         this.dispose();

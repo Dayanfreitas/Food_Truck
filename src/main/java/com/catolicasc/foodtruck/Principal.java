@@ -67,9 +67,7 @@ public class Principal extends JFrame {
 				JUserList listUsers = new JUserList();
 				desktopPane.add(listUsers);
 				listUsers.setVisible(true);
-
 			}
-			
 		});
 		
 		menuTelas.add(opUser);
