@@ -96,18 +96,18 @@ public class JUser extends JInternalFrame {
 						
 						userRepository.add(user);
 						msg  = "Usuário cadastrado com sucesso!";
-						JUser.this.dispose();
+						
 						
 					}else {
 						user.setName(name);
 						user.setEmail(email);
 						userRepository.edit(user);
 						msg = "Atualizado com sucesso!";
-						JUser.this.dispose();
 					}
-					
+				JUser.this.dispose();
 				}catch (Exception ex) {
 					msg = "Erro ao salvar usuário!";
+					user = null;
 				}
 				JOptionPane.showMessageDialog(null, msg);
 			}

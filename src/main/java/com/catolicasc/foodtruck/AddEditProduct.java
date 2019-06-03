@@ -120,13 +120,11 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
     	if(new Help().confirmCancel(evt)) 
     		this.dispose();
     }
-    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
+    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {
     	String msg = "";
         try {
             String description = tfDescricao.getText();
             Double price       = Double.valueOf(tfPreco.getText());
-            
-            System.out.print(price);
             
         	if (productBO.verificarProdutoExiste(product) == false){
         		product = new Product();
@@ -141,7 +139,7 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
                 productRepository.edit(product);
                 msg = "Produto editado com sucesso";
             }
-        	
+        this.dispose();
         }catch(Exception ex) {
         	msg = "Ocorreu um problema ao salvar";
         	product = null;
