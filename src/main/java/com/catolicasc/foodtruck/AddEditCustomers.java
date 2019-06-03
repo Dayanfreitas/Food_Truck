@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.SpringLayout;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 import com.catolicasc.foodtruck.models.Address;
 import com.catolicasc.foodtruck.models.Customers;
@@ -24,22 +26,33 @@ public class AddEditCustomers extends JInternalFrame {
 	private JTextField tfName;
 	private JTextField tfEmail;
 	private JTextField tFRua;
-	private JTextField tFNumero;
-	private JTextField tFBairro;
 
 	public void setCustomer(Customers customers){
         this.customers = customers;
     }
-	private void updateScreen(Product product){
+	private void updateScreen(Customers customers){
         tfId.setText(customers.getCustomers().getId().toString());
         tfName.setText(customers.getCustomers().getName());
         tfEmail.setText(customers.getCustomers().getEmail());
         
         String endereco = customers.getAddress();
+        tFRua.setText(endereco);
         
     }
 	
 	public AddEditCustomers() {
+
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameOpened(InternalFrameEvent e) {
+				if (customers != null){
+					updateScreen(customers);
+				}
+			}
+			
+		});
+		
+		
 		setClosable(true);
 		setBounds(100, 100, 450, 300);
 		SpringLayout springLayout = new SpringLayout();
@@ -82,7 +95,7 @@ public class AddEditCustomers extends JInternalFrame {
 		getContentPane().add(tfEmail);
 		tfEmail.setColumns(10);
 		
-		JLabel lblRua = new JLabel("Rua:");
+		JLabel lblRua = new JLabel("Endereço:");
 		springLayout.putConstraint(SpringLayout.NORTH, lblRua, 30, SpringLayout.SOUTH, lblEmail);
 		springLayout.putConstraint(SpringLayout.WEST, lblRua, 0, SpringLayout.WEST, lblId);
 		getContentPane().add(lblRua);
@@ -90,51 +103,28 @@ public class AddEditCustomers extends JInternalFrame {
 		tFRua = new JTextField();
 		springLayout.putConstraint(SpringLayout.NORTH, tFRua, 6, SpringLayout.SOUTH, lblRua);
 		springLayout.putConstraint(SpringLayout.WEST, tFRua, 10, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, tFRua, -208, SpringLayout.EAST, getContentPane());
 		getContentPane().add(tFRua);
 		tFRua.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Numero:");
-		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, 0, SpringLayout.SOUTH, lblRua);
-		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, -143, SpringLayout.EAST, getContentPane());
-		getContentPane().add(lblNewLabel);
-		
-		tFNumero = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, tFNumero, 6, SpringLayout.SOUTH, lblNewLabel);
-		springLayout.putConstraint(SpringLayout.WEST, tFNumero, 6, SpringLayout.EAST, tFRua);
-		springLayout.putConstraint(SpringLayout.EAST, tFNumero, 71, SpringLayout.EAST, tFRua);
-		getContentPane().add(tFNumero);
-		tFNumero.setColumns(10);
-		
-		JLabel lblBairro = new JLabel("Bairro:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblBairro, 0, SpringLayout.NORTH, lblRua);
-		getContentPane().add(lblBairro);
-		
-		tFBairro = new JTextField();
-		springLayout.putConstraint(SpringLayout.WEST, lblBairro, 0, SpringLayout.WEST, tFBairro);
-		springLayout.putConstraint(SpringLayout.WEST, tFBairro, 6, SpringLayout.EAST, tFNumero);
-		springLayout.putConstraint(SpringLayout.SOUTH, tFBairro, 0, SpringLayout.SOUTH, tFRua);
-		getContentPane().add(tFBairro);
-		tFBairro.setColumns(10);
-		
 		JButton btnSalvar = new JButton("Salvar");
+		springLayout.putConstraint(SpringLayout.EAST, tFRua, 0, SpringLayout.EAST, btnSalvar);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btSaveActionPerformed(e);
 			}
 		});
 		springLayout.putConstraint(SpringLayout.SOUTH, btnSalvar, -10, SpringLayout.SOUTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, btnSalvar, 0, SpringLayout.EAST, tFBairro);
 		getContentPane().add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		springLayout.putConstraint(SpringLayout.EAST, btnCancelar, -114, SpringLayout.EAST, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, btnSalvar, 6, SpringLayout.EAST, btnCancelar);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btCancelActionPerformed(e);
 			}
 		});
 		springLayout.putConstraint(SpringLayout.NORTH, btnCancelar, 0, SpringLayout.NORTH, btnSalvar);
-		springLayout.putConstraint(SpringLayout.EAST, btnCancelar, -6, SpringLayout.WEST, btnSalvar);
 		getContentPane().add(btnCancelar);
 
 	}
@@ -150,11 +140,11 @@ public class AddEditCustomers extends JInternalFrame {
 			String nome  = tfName.getText().toString();
 			String email = tfEmail.getText().toString();
 			String rua   = tFRua.getText().toString();
-			String numero= tFNumero.getText().toString();
-			String bairro= tFBairro.getText().toString();
 		
         	if (customers ==  null){
-        		Address endereco = new Address(rua,numero,bairro); 
+        		Address endereco = new Address();
+        		endereco.setStreet(rua);
+        		
         		customers = new Customers();
         		customers.getCustomers().setName(nome);
         		customers.getCustomers().setEmail(email);

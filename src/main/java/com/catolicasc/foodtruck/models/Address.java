@@ -40,7 +40,7 @@ public class Address {
 	
 	@Override
 	public String toString() {
-		return String.format("Rua %s %s %s %s",getStreet(),getNumber(),getDistrict(),getCity());
+		return String.format("%s",getStreet());
 	}
 	
 	public static void main(String[] args) {

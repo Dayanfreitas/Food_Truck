@@ -12,6 +12,7 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.DefaultTableModel;
 
 import com.catolicasc.foodtruck.models.Customers;
+import com.catolicasc.foodtruck.models.User;
 import com.catolicasc.foodtruck.repositories.CustomersRepository;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -80,6 +81,26 @@ public class JCustomersList extends JInternalFrame {
 		getContentPane().add(btnAdicionar);
 		
 		JButton btnEdit = new JButton("Editar");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				if (table.getSelectedRowCount() == 0) {
+					JOptionPane.showMessageDialog(null, "Selecione um usuário");
+					return;
+				}
+				
+				int idColumn = 0;
+				Integer rowIndex = table.getSelectedRow();
+				Integer customersId   = (Integer)table.getModel().getValueAt(rowIndex, idColumn);
+				
+				Customers customers = customersRepository.getUserById(customersId);
+				
+				AddEditCustomers addEditCustomers = new AddEditCustomers();
+				addEditCustomers.setCustomer(customers);
+				getParent().add(addEditCustomers);
+				addEditCustomers.setVisible(true);
+			}
+		});
 		btnEdit.setBounds(136, 232, 114, 25);
 		getContentPane().add(btnEdit);
 		
