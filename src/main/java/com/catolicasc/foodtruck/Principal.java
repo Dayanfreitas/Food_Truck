@@ -9,7 +9,6 @@ import javax.swing.JMenu;
 import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 /**
 *
 * @author dayanfreitas
@@ -74,6 +73,18 @@ public class Principal extends JFrame {
 		});
 		
 		menuTelas.add(opUser);
+		
+		JMenuItem opProdutos = new JMenuItem("Produtos");
+		opProdutos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				 JProductList listProducts = new JProductList();
+				 desktopPane.add(listProducts);
+				 listProducts.setVisible(true);
+				
+			}
+		});
+		menuTelas.add(opProdutos);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

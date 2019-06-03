@@ -1,14 +1,21 @@
 package com.catolicasc.foodtruck;
 
+import com.catolicasc.foodtruck.BO.ProductBO;
 import com.catolicasc.foodtruck.models.Product;
 import com.catolicasc.foodtruck.repositories.ProductRepository;
 import javax.swing.JOptionPane;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.GroupLayout;
 
 public class AddEditProduct extends javax.swing.JInternalFrame {
     private ProductRepository productRepository = new ProductRepository();
+    private ProductBO productBO = new ProductBO();
     private Product product;
-    
-    public void setUser(Product product){
+   
+    public void setProduct(Product product){
         this.product = product;
     }
     
@@ -18,36 +25,41 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
         tfPreco.setText(Double.toString(product.getPrice()));
     }
 
-
     public AddEditProduct() {
+    	setClosable(true);
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btCancel = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        tfID = new javax.swing.JTextField();
-        tfDescricao = new javax.swing.JTextField();
-        tfPreco = new javax.swing.JTextField();
-        btSave = new javax.swing.JButton();
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameOpened(InternalFrameEvent e) {
+				if (productBO.verificarProdutoExiste(product) == true){
+					updateScreen(product);
+				}
+			}
+			
+		});
+        btCancel     = new javax.swing.JButton();
+        jlDescricao  = new javax.swing.JLabel();
+        jlPreco      = new javax.swing.JLabel();
+        jlCodigo     = new javax.swing.JLabel();
+        tfID         = new javax.swing.JTextField();
+        tfDescricao  = new javax.swing.JTextField();
+        tfPreco      = new javax.swing.JTextField();
+        btSave       = new javax.swing.JButton();
 
         btCancel.setText("Cancelar");
         btCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelActionPerformed(evt);
+            	btCancelActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Descrição:");
-
-        jLabel2.setText("Preço:");
-
-        jLabel3.setText("Código:");
+        jlDescricao.setText("Descrição:");
+        jlPreco.setText("Preço:");
+        jlCodigo.setText("Código:");
 
         tfID.setEditable(false);
         tfID.setEnabled(false);
@@ -60,93 +72,100 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btSave))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(10)
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(btCancel)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(btSave))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jlDescricao)
+        						.addGroup(layout.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(jlCodigo))
+        						.addGroup(layout.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(jlPreco, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addGap(27)))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(tfDescricao, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(tfPreco, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(tfID, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))))
+        			.addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(tfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btSave)
-                    .addComponent(btCancel))
-                .addGap(23, 23, 23))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(8)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(tfID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jlCodigo))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jlDescricao)
+        				.addComponent(tfDescricao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(tfPreco)
+        				.addComponent(jlPreco))
+        			.addGap(50)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btSave)
+        				.addComponent(btCancel))
+        			.addGap(23))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btCancelActionPerformed
-
-    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
+  
+    /**
+     * @author dayanfreitas
+     * @param evt
+     */
+    private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {
+    	if(new Help().confirmCancel(evt)) 
+    		this.dispose();
+    }
+    private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {
+    	String msg = "";
         try {
             String description = tfDescricao.getText();
-            Double price = Double.parseDouble(tfPreco.getText());
-            String mensagem_usuario = "";
-
-            if(product == null){
-                product = new Product();
-                product.setDescription(description);
+            Double price       = Double.valueOf(tfPreco.getText());
+            
+        	if (productBO.verificarProdutoExiste(product) == false){
+        		product = new Product();
+            	product.setDescription(description);
                 product.setPrice(price);
-                productRepository.add(product);
-                mensagem_usuario = "Produto cadastrado com sucesso";
+                productRepository.add(product);        		
+                msg = "Produto cadastrado com sucesso";
             }
             else{
                 product.setDescription(description);
                 product.setPrice(price);
                 productRepository.edit(product);
-                mensagem_usuario = "Produto editado com sucesso";
+                msg = "Produto editado com sucesso";
             }
-
-            updateScreen(product);
-
-            JOptionPane.showMessageDialog(null, mensagem_usuario);
-            this.dispose();
+        this.dispose();
         }catch(Exception ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um problema ao salvar");
+        	msg = "Ocorreu um problema ao salvar";
+
         }
-    }//GEN-LAST:event_btSaveActionPerformed
+        JOptionPane.showMessageDialog(null, msg);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancel;
     private javax.swing.JButton btSave;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jlDescricao;
+    private javax.swing.JLabel jlPreco;
+    private javax.swing.JLabel jlCodigo;
     private javax.swing.JTextField tfDescricao;
     private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfPreco;

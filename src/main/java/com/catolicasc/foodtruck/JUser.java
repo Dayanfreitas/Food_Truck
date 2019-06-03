@@ -84,6 +84,7 @@ public class JUser extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String msg   = "";
+				
 				try {
 					String name  = textFieldName.getText();
 					String email = textFieldEmail.getText();
@@ -93,23 +94,20 @@ public class JUser extends JInternalFrame {
 						user.setName(name);
 						user.setEmail(email);
 						
-						if (userBO.verificarNomeExiste(user)) {
-							userRepository.add(user);
-							msg  = "Usuário cadastrado com sucesso!";
-							JUser.this.dispose();
-						}else {
-							msg = "Nome é obrigatório!";
-						}
+						userRepository.add(user);
+						msg  = "Usuário cadastrado com sucesso!";
+						
+						
 					}else {
 						user.setName(name);
 						user.setEmail(email);
 						userRepository.edit(user);
 						msg = "Atualizado com sucesso!";
-						JUser.this.dispose();
 					}
-					
+				JUser.this.dispose();
 				}catch (Exception ex) {
 					msg = "Erro ao salvar usuário!";
+					user = null;
 				}
 				JOptionPane.showMessageDialog(null, msg);
 			}
@@ -119,7 +117,7 @@ public class JUser extends JInternalFrame {
 		JButton btnCancel = new JButton("Cancelar");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JUser.this.dispose();
+				btCancelActionPerformed(e);
 			}
 		});
 		btnCancel.setBounds(66, 119, 99, 23);
@@ -148,5 +146,12 @@ public class JUser extends JInternalFrame {
 		textFieldID.setText("-");
 		textFieldName.setText("");
 		textFieldEmail.setText("");
+	}
+	
+
+	private void btCancelActionPerformed(ActionEvent e) {
+		System.out.print(e);
+		if(new Help().confirmCancel(e))
+			this.dispose();
 	}
 }

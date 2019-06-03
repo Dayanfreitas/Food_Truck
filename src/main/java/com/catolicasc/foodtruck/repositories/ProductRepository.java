@@ -10,21 +10,32 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductRepository {
-    
     private Connection connection;
-    
+    private static final String TABLE  = "PRODUCTS";
+    private static final String CREATE = "INSERT INTO "+TABLE+" (DESCRIPTION, PRICE) VALUES (?, ?)";
+    private static final String READ   = "SELECT ID, DESCRIPTION, PRICE FROM "+TABLE;
+    private static final String UPDATE = "UPDATE "+TABLE+" SET DESCRIPTION=?, PRICE=? WHERE ID=?";
+    private static final String DELETE = "DELETE FROM "+TABLE+" WHERE ID=?";
+    private static final String GET_ID = "SELECT ID, DESCRIPTION, PRICE FROM "+TABLE+" WHERE ID = ?";
+    public ProductRepository() {
+        connection = new ConnectionFactory().getConnection();
+    }
+    /**
+     * Busca todos o produtos cadastrados 
+     * @return ArrayList<{@link Product}>
+     */
     public ArrayList<Product> getAllProducts(){
         try {
             ArrayList<Product>  products = new ArrayList<>();
             
-            String sql = "SELECT id, description, price FROM products";
+            String sql = READ;
             Statement selectStmt = connection.createStatement();
             ResultSet resultSet = selectStmt.executeQuery(sql);
             
             while(resultSet.next()){
-                int              id = resultSet.getInt("id");
-                String  description = resultSet.getString("description");
-                Double        price = resultSet.getDouble("price");
+                int              id = resultSet.getInt("ID");
+                String  description = resultSet.getString("DESCRIPTION");
+                Double        price = resultSet.getDouble("PRICE");
                 
                 Product product = new Product();
                 product.setId(id);
@@ -34,20 +45,15 @@ public class ProductRepository {
                 products.add(product);
             }
             
-            
-            
             return products;
         }catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-
-        
-        
     }
-    
+
     public Product getProductById(Integer productId){
         try {
-            String sql = "SELECT id, description, price FROM products WHERE id = ?";
+            String sql = GET_ID;
             PreparedStatement selectStmt = connection.prepareStatement(sql);
             selectStmt.setInt(1, productId);
             ResultSet resultSet = selectStmt.executeQuery();
@@ -58,9 +64,9 @@ public class ProductRepository {
             if(resultSet.first()){
                 product = new Product();
 
-                int id = resultSet.getInt("id");
-                String description = resultSet.getString("description");
-                Double price = resultSet.getDouble("price");
+                int id = resultSet.getInt("ID");
+                String description = resultSet.getString("DESCRIPTION");
+                Double price = resultSet.getDouble("PRICE");
                 
                 product.setId(id);
                 product.setDescription(description);
@@ -76,13 +82,9 @@ public class ProductRepository {
         
     }
     
-    public ProductRepository() {
-        connection = new ConnectionFactory().getConnection();
-    }
-    
     public Product add(Product product) {
         try {
-            String sql = "INSERT INTO PRODUCTS (DESCRIPTION, PRICE) VALUES (?, ?)";
+            String sql = CREATE;
             PreparedStatement insertStmt = connection.prepareStatement(sql);
             insertStmt.setString(1, product.getDescription());
             insertStmt.setDouble(2, product.getPrice());
@@ -106,7 +108,7 @@ public class ProductRepository {
     
     public Product edit(Product product) {
         try {
-            String sql = "UPDATE PRODUCTS SET NAME=?, DESCRIPTION=? WHERE ID=?";
+            String sql = UPDATE;
             PreparedStatement updateStmt = connection.prepareStatement(sql);
             updateStmt.setString(1, product.getDescription());
             updateStmt.setDouble(2, product.getPrice());
@@ -123,7 +125,7 @@ public class ProductRepository {
     public void delete(int productId)
     {
         try {
-            String sql = "DELETE FROM PRODUCTS WHERE ID=?";
+            String sql = DELETE;
             PreparedStatement deleteStmt = connection.prepareStatement(sql);
             deleteStmt.setInt(1, productId);
             deleteStmt.executeUpdate();
