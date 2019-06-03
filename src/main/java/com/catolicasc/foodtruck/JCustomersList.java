@@ -67,6 +67,15 @@ public class JCustomersList extends JInternalFrame {
 		scrollPane.setViewportView(table);	
 		
 		JButton btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				AddEditCustomers addEditCustomers = new AddEditCustomers();
+				getParent().add(addEditCustomers);
+				addEditCustomers.setVisible(true);
+		
+			}
+		});
 		btnAdicionar.setBounds(10, 231, 114, 25);
 		getContentPane().add(btnAdicionar);
 		

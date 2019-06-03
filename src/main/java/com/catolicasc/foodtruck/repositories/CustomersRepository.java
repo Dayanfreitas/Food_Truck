@@ -2,6 +2,8 @@ package com.catolicasc.foodtruck.repositories;
 
 import com.catolicasc.foodtruck.ConnectionFactory;
 import com.catolicasc.foodtruck.models.Customers;
+import com.catolicasc.foodtruck.models.User;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +24,31 @@ public class CustomersRepository {
     public CustomersRepository() {
     	connection = new ConnectionFactory().getConnection();
 	}
+    
+    public Customers add(Customers customers) {
+        try {
+            String sql = CREATE;
+        	PreparedStatement insertStmt = connection.prepareStatement(sql);
+            insertStmt.setString(1, customers.getCustomers().getName());
+            insertStmt.setString(2, customers.getCustomers().getEmail());
+            insertStmt.setString(3, customers.getAddress());
+            insertStmt.executeUpdate();
+            insertStmt.close();
+            
+            sql = "SELECT LAST_INSERT_ID() AS ID";
+            Statement selectStmt = connection.createStatement();
+            ResultSet resultSet = selectStmt.executeQuery(sql);
+            while(resultSet.next()) {
+                Integer id  = resultSet.getInt("ID");
+                customers.getCustomers().setId(id);
+            }
+            selectStmt.close();
+            
+            return customers;
+        }catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
     
     public ArrayList<Customers> getAllCustomers(){
         try {
