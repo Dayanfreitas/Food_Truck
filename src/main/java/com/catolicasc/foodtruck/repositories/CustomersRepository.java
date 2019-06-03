@@ -1,7 +1,6 @@
 package com.catolicasc.foodtruck.repositories;
 
 import com.catolicasc.foodtruck.ConnectionFactory;
-import com.catolicasc.foodtruck.models.Address;
 import com.catolicasc.foodtruck.models.Customers;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,6 +51,20 @@ public class CustomersRepository {
             throw new RuntimeException(ex);
         }
     }
+
+	public void delete(Integer userId) {
+		   try {
+	            String sql = DELETE;
+	            PreparedStatement deleteStmt = connection.prepareStatement(sql);
+	            deleteStmt.setInt(1, userId);
+	            deleteStmt.executeUpdate();
+	            deleteStmt.close();
+	            
+	            return;
+	        }catch (SQLException ex) {
+	            throw new RuntimeException(ex);
+	        }
+	}
     
     
 }
