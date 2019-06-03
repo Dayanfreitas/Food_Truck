@@ -6,6 +6,8 @@ import com.catolicasc.foodtruck.repositories.ProductRepository;
 import javax.swing.JOptionPane;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.GroupLayout;
 
 public class AddEditProduct extends javax.swing.JInternalFrame {
@@ -13,7 +15,7 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
     private ProductBO productBO = new ProductBO();
     private Product product;
    
-    public void setUser(Product product){
+    public void setProduct(Product product){
         this.product = product;
     }
     
@@ -29,6 +31,16 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
     }
 
     private void initComponents() {
+
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameOpened(InternalFrameEvent e) {
+				if (productBO.verificarProdutoExiste(product) == true){
+					updateScreen(product);
+				}
+			}
+			
+		});
         btCancel     = new javax.swing.JButton();
         jlDescricao  = new javax.swing.JLabel();
         jlPreco      = new javax.swing.JLabel();
@@ -142,7 +154,7 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
         this.dispose();
         }catch(Exception ex) {
         	msg = "Ocorreu um problema ao salvar";
-        	product = null;
+
         }
         JOptionPane.showMessageDialog(null, msg);
     }

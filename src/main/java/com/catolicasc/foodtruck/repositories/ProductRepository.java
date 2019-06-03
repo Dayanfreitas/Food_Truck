@@ -14,7 +14,7 @@ public class ProductRepository {
     private static final String TABLE  = "PRODUCTS";
     private static final String CREATE = "INSERT INTO "+TABLE+" (DESCRIPTION, PRICE) VALUES (?, ?)";
     private static final String READ   = "SELECT ID, DESCRIPTION, PRICE FROM "+TABLE;
-    private static final String UPDATE = "";
+    private static final String UPDATE = "UPDATE "+TABLE+" SET DESCRIPTION=?, PRICE=? WHERE ID=?";
     private static final String DELETE = "DELETE FROM "+TABLE+" WHERE ID=?";
     private static final String GET_ID = "SELECT ID, DESCRIPTION, PRICE FROM "+TABLE+" WHERE ID = ?";
     public ProductRepository() {
@@ -53,7 +53,7 @@ public class ProductRepository {
 
     public Product getProductById(Integer productId){
         try {
-            String sql = "SELECT id, description, price FROM products WHERE id = ?";
+            String sql = GET_ID;
             PreparedStatement selectStmt = connection.prepareStatement(sql);
             selectStmt.setInt(1, productId);
             ResultSet resultSet = selectStmt.executeQuery();
@@ -64,9 +64,9 @@ public class ProductRepository {
             if(resultSet.first()){
                 product = new Product();
 
-                int id = resultSet.getInt("id");
-                String description = resultSet.getString("description");
-                Double price = resultSet.getDouble("price");
+                int id = resultSet.getInt("ID");
+                String description = resultSet.getString("DESCRIPTION");
+                Double price = resultSet.getDouble("PRICE");
                 
                 product.setId(id);
                 product.setDescription(description);
@@ -108,7 +108,7 @@ public class ProductRepository {
     
     public Product edit(Product product) {
         try {
-            String sql = "UPDATE PRODUCTS SET NAME=?, DESCRIPTION=? WHERE ID=?";
+            String sql = UPDATE;
             PreparedStatement updateStmt = connection.prepareStatement(sql);
             updateStmt.setString(1, product.getDescription());
             updateStmt.setDouble(2, product.getPrice());

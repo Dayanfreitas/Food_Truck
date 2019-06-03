@@ -100,14 +100,15 @@ public class JProductList extends JInternalFrame {
 				
 				int idColumn = 0;
 				Integer rowIndex = table.getSelectedRow();
-				Integer userId   = (Integer)table.getModel().getValueAt(rowIndex, idColumn);
+				Integer productId   = (Integer)table.getModel().getValueAt(rowIndex, idColumn);
 				
-			//	User user = userRepository.getUserById(userId);
+				Product product = productRepository.getProductById(productId);
 				
-			//	JUser jUser = new JUser();
-				//jUser.setUser(user);
-				//getParent().add(jUser);
-				//jUser.setVisible(true);
+				AddEditProduct addEditProduct = new AddEditProduct();
+				addEditProduct.setProduct(product);
+				getParent().add(addEditProduct);
+				addEditProduct.setVisible(true);
+				
 			}
 		});
 		
