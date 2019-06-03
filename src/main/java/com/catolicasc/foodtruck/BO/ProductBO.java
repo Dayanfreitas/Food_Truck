@@ -1,8 +1,6 @@
 package com.catolicasc.foodtruck.BO;
 
 import com.catolicasc.foodtruck.models.Product;
-import com.mysql.cj.util.StringUtils;
-
 public class ProductBO {
 	
 	public Boolean verificarProdutoExiste(Product product) {
