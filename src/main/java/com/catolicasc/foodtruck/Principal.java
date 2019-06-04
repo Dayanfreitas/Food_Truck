@@ -102,6 +102,7 @@ public class Principal extends JFrame {
                                 JPedidoList jPedidoList = new JPedidoList();
                                 desktopPane.add(jPedidoList);
                                 jPedidoList.setVisible(true);     
+                                
                                 //JProductList JlistProducts = new JProductList();
                                 //desktopPane.add(JlistProducts);
                                 //JlistProducts.setVisible(true);

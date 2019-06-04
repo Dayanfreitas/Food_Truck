@@ -19,6 +19,10 @@ public class Orders {
     Date prepared_date;
     Date delivery_date;
 
+    public Orders() {
+    	customers = new Customers();
+    	seller    = new User();
+	}
     public Integer getId() {
         return id;
     }
