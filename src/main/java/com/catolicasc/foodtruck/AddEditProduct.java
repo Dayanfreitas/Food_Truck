@@ -67,7 +67,29 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
         btSave.setText("Salvar");
         btSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSaveActionPerformed(evt);
+            	String msg = "";
+                try {
+                    String description = tfDescricao.getText().toString();
+                    Double price       =  Double.valueOf(tfPreco.getText().toString());
+                    
+                    if (product == null){
+                		product = new Product();
+                    	product.setDescription(description);
+                        product.setPrice(price);
+                        productRepository.add(product);        		
+                        msg = "Produto cadastrado com sucesso";
+                    }
+                    else{
+                        product.setDescription(description);
+                        product.setPrice(price);
+                        productRepository.edit(product);
+                        msg = "Produto editado com sucesso";
+                    }
+                }catch(Exception ex) {
+                	msg = "Ocorreu um problema ao salvar";
+                }
+                JOptionPane.showMessageDialog(null, msg);
+            
             }
         });
 
@@ -122,7 +144,7 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
   
     /**
      * @author dayanfreitas
@@ -133,30 +155,7 @@ public class AddEditProduct extends javax.swing.JInternalFrame {
     		this.dispose();
     }
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {
-    	String msg = "";
-        try {
-            String description = tfDescricao.getText();
-            Double price       = Double.valueOf(tfPreco.getText());
-            
-        	if (productBO.verificarProdutoExiste(product) == false){
-        		product = new Product();
-            	product.setDescription(description);
-                product.setPrice(price);
-                productRepository.add(product);        		
-                msg = "Produto cadastrado com sucesso";
-            }
-            else{
-                product.setDescription(description);
-                product.setPrice(price);
-                productRepository.edit(product);
-                msg = "Produto editado com sucesso";
-            }
-        this.dispose();
-        }catch(Exception ex) {
-        	msg = "Ocorreu um problema ao salvar";
-
-        }
-        JOptionPane.showMessageDialog(null, msg);
+    	
     }
 
 

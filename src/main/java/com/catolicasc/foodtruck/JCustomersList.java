@@ -12,7 +12,6 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.DefaultTableModel;
 
 import com.catolicasc.foodtruck.models.Customers;
-import com.catolicasc.foodtruck.models.User;
 import com.catolicasc.foodtruck.repositories.CustomersRepository;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -115,9 +114,9 @@ public class JCustomersList extends JInternalFrame {
 				
 				int idColumn = 0;
 				Integer rowIndex = table.getSelectedRow();
-				Integer userId   = (Integer)table.getModel().getValueAt(rowIndex, idColumn);
+				Integer customersId   = (Integer)table.getModel().getValueAt(rowIndex, idColumn);
 				
-				customersRepository.delete(userId);
+				customersRepository.delete(customersId);
 				refreshCustomesList();
 			}
 		});

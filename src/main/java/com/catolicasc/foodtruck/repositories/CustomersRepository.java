@@ -2,7 +2,6 @@ package com.catolicasc.foodtruck.repositories;
 
 import com.catolicasc.foodtruck.ConnectionFactory;
 import com.catolicasc.foodtruck.models.Customers;
-import com.catolicasc.foodtruck.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import javax.print.attribute.standard.RequestingUserName;
 
 public class CustomersRepository {
     private Connection connection;
@@ -30,7 +27,7 @@ public class CustomersRepository {
     public Customers add(Customers customers) {
         try {
             String sql = CREATE;
-        	PreparedStatement insertStmt = connection.prepareStatement(sql);
+            PreparedStatement insertStmt = connection.prepareStatement(sql);
             insertStmt.setString(1, customers.getCustomers().getName());
             insertStmt.setString(2, customers.getCustomers().getEmail());
             insertStmt.setString(3, customers.getAddress());
@@ -81,11 +78,11 @@ public class CustomersRepository {
         }
     }
 
-	public void delete(Integer userId) {
+	public void delete(Integer customersId) {
 		   try {
 	            String sql = DELETE;
 	            PreparedStatement deleteStmt = connection.prepareStatement(sql);
-	            deleteStmt.setInt(1, userId);
+	            deleteStmt.setInt(1, customersId);
 	            deleteStmt.executeUpdate();
 	            deleteStmt.close();
 	            
@@ -95,8 +92,8 @@ public class CustomersRepository {
 	        }
 	}
 
-	public Customers getUserById(Integer customersId) {
-		try {
+	public Customers getUserById(int customersId) {
+            try {
             String sql = GET_ID;
             PreparedStatement selectStmt = connection.prepareStatement(sql);
             selectStmt.setInt(1, customersId);
@@ -107,7 +104,7 @@ public class CustomersRepository {
             if(resultSet.first()){
             	customers = new Customers();
 
-	             int id 		= resultSet.getInt("ID");
+	             int id 	    = resultSet.getInt("ID");
 	             String name    = resultSet.getString("NAME");
 	             String email   = resultSet.getString("EMAIL");
 	             String address = resultSet.getString("ADDRESS");
@@ -125,7 +122,7 @@ public class CustomersRepository {
 	}
 
 	public Customers edit(Customers customers) {
-		try {
+            try {
             String sql = UPDATE;
             PreparedStatement updateStmt = connection.prepareStatement(sql);
             updateStmt.setString(1, customers.getCustomers().getName());

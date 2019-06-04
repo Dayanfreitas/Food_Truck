@@ -93,8 +93,24 @@ public class Principal extends JFrame {
 				jCustomersList.setVisible(true);
 			}
 		});
-		menuTelas.add(opClientes);
-		contentPane = new JPanel();
+                menuTelas.add(opClientes);
+		
+                JMenuItem opPedido = new JMenuItem("Pedido");
+		opPedido.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+                                JPedidoList jPedidoList = new JPedidoList();
+                                desktopPane.add(jPedidoList);
+                                jPedidoList.setVisible(true);     
+                                
+                                //JProductList JlistProducts = new JProductList();
+                                //desktopPane.add(JlistProducts);
+                                //JlistProducts.setVisible(true);
+			}
+		});
+		menuTelas.add(opPedido);	
+		
+                contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
