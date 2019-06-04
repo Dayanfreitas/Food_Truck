@@ -50,7 +50,7 @@ public class JPedidoList extends javax.swing.JInternalFrame {
 					order.getId(),
 					customers.getCustomers().getName(),
 					"",
-					"",
+					order.getOrder_date().toString(),
 					"",
 					""
 			});
@@ -80,14 +80,10 @@ public class JPedidoList extends javax.swing.JInternalFrame {
         });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código do pedido", "Nome do cliente", "Valor total do pedido", "Data e hora do pedido ", "Data e hora de término do preparo", "Data e hora da entrega"
-            }
-        ) {
-            Class[] types = new Class [] {
+            new Object [][] {},
+            new String [] {"Código do pedido", "Nome do cliente", "Valor total do pedido", "Data e hora do pedido ", "Data e hora de término do preparo", "Data e hora da entrega"}) 
+        	{
+        	Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {

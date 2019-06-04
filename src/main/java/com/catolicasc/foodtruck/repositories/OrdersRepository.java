@@ -36,7 +36,7 @@ public class OrdersRepository {
                 	int       id = resultSet.getInt("ID");
                     int  idCliente  = resultSet.getInt("CUSTOMERID");
                     int  idAtentente= resultSet.getInt("SELLERID");
-                   // Date dataPedido = resultSet.getDate("ORDERDATE");
+                    Date dataPedido = resultSet.getDate("ORDERDATE");
                     //Date dataPreparo = resultSet.getDate("PREPAREDDATE");
                     //Date dataEntrega = resultSet.getDate("DELIVERYDATE");
                     
@@ -44,7 +44,7 @@ public class OrdersRepository {
                     order.setId(id);
                     order.getCustomers().getCustomers().setId(idCliente);
                     order.getSeller().setId(idAtentente);
-                    
+                    order.setOrder_date(dataPedido);
                     //  order.setName(name);
                  //  order.setEmail(email);
                     
