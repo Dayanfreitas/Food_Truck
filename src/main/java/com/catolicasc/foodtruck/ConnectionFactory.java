@@ -22,7 +22,7 @@ public class ConnectionFactory {
 	 */
 	public Connection getConnection() {
         try {
-            String host = "jdbc:mysql://localhost/food_truck?useTimezone=true&serverTimezone=UTC";
+            String host = "jdbc:mysql://localhost/Food_Truck?useTimezone=true&serverTimezone=UTC";
             String user = "root";
             String password = "root";
             Connection connection = DriverManager.getConnection(host, user, password);

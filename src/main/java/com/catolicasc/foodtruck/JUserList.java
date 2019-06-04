@@ -75,6 +75,7 @@ public class JUserList extends JInternalFrame {
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+					
 					JUser jUser = new JUser();
 					getParent().add(jUser);
 					jUser.setVisible(true);
@@ -98,7 +99,7 @@ public class JUserList extends JInternalFrame {
 				Integer userId   = (Integer)table.getModel().getValueAt(rowIndex, idColumn);
 				
 				User user = userRepository.getUserById(userId);
-				
+
 				JUser jUser = new JUser();
 				jUser.setUser(user);
 				getParent().add(jUser);
