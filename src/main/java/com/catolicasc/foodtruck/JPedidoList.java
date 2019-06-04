@@ -51,8 +51,8 @@ public class JPedidoList extends javax.swing.JInternalFrame {
 					customers.getCustomers().getName(),
 					"",
 					order.getOrder_date().toString(),
-					"",
-					""
+					order.getPrepared_date().toString(),
+					order.getDelivery_date().toString()
 			});
 		}
 	}

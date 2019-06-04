@@ -1,11 +1,13 @@
 package com.catolicasc.foodtruck.repositories;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 import com.catolicasc.foodtruck.ConnectionFactory;
 import com.catolicasc.foodtruck.models.Orders;
@@ -37,17 +39,17 @@ public class OrdersRepository {
                     int  idCliente  = resultSet.getInt("CUSTOMERID");
                     int  idAtentente= resultSet.getInt("SELLERID");
                     Date dataPedido = resultSet.getDate("ORDERDATE");
-                    //Date dataPreparo = resultSet.getDate("PREPAREDDATE");
-                    //Date dataEntrega = resultSet.getDate("DELIVERYDATE");
-                    
+                    Date prepared_date = resultSet.getDate("PREPAREDDATE");
+                    Date delivery_date = resultSet.getDate("DELIVERYDATE");
+
                     Orders order = new Orders();
                     order.setId(id);
                     order.getCustomers().getCustomers().setId(idCliente);
                     order.getSeller().setId(idAtentente);
                     order.setOrder_date(dataPedido);
-                    //  order.setName(name);
-                 //  order.setEmail(email);
-                    
+                    order.setPrepared_date(prepared_date);
+                    order.setDelivery_date(delivery_date);
+//                    
                     orders.add(order);
                 }
                 return orders;
